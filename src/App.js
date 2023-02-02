@@ -8,12 +8,14 @@ import Footer from "./components/Footer";
 function App() {
   return (
    <>
-    <Header/>
-    <Routes>
-      <Route path="/" element={<Login/>}/>
-      <Route path="/listado" element={<Listado/>}/>
-    </Routes>
-    <Footer/>
+      <Header/>
+      <div className="container mt-3">
+        <Routes>
+          <Route path="/" element={<Login/>}/>
+          <Route path="/listado" element={<Listado/>}/>
+        </Routes>
+      </div>
+      <Footer/>
    </>
    
   );
