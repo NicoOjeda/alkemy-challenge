@@ -41,12 +41,16 @@ function Login() {
             swal(<h2>'Estas dentro'</h2>);
                 const tokenrecibido = res.data.token;
                 localStorage.setItem('token', tokenrecibido)
+                navigate('/listado')
         })
-        navigate('/listado')
     }
+
+    
+   
 
   return (
     <>
+    
     <h2>Formulario de login</h2>
     <form onSubmit={submitHandler}>
         <label>
