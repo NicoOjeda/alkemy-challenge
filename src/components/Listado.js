@@ -23,18 +23,25 @@ function Listado() {
     return (
     <div>
       <div className='row'>
-        <div className='col-3' style={{border: '1px solid black'}} >
-          <div className="card">
-            <img src="..." className="card-img-top" alt="..."/>
-            <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <Link href="/" className="btn btn-primary">Go somewhere</Link>
-            </div>
+      {
+        personajes.map((personaje) =>{
+          return(
+            <div className='col-3' style={{border: '1px solid black'}} key={personaje.id}>
+              <div className="card">
+                  <img src={personaje.image} className="card-img-top" alt="..."/>
+                  <div className="card-body">
+                    <h5 className="card-title">{personaje.name}</h5>
+                    <p className="card-text">Genero: {personaje.gender}</p>
+                    <p className="card-text">Especie: {personaje.species}</p>
+                    <p className="card-text">Estatus: {personaje.status}</p>
+                    <Link to="/" className="btn btn-primary">Volver</Link>
+                  </div>
+              </div>
           </div>
-        </div>
-       
-
+          )
+        })
+      }
+ 
       </div>
     </div>
   )
