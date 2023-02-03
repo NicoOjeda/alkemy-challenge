@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, Link} from 'react-router-dom'
-
+import swal from '@sweetalert/with-react'
 
 function Listado() {
 
@@ -16,6 +16,11 @@ function Listado() {
         }
         axios.get('https://rickandmortyapi.com/api/character')
         .then(res=>setPersonajes(res.data.results))
+        .catch(error=>{
+          swal(
+            <h2>{error}</h2>
+        )
+        })
     }, [setPersonajes]);
 
     console.log(personajes);
