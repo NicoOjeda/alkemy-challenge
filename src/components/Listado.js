@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import { useNavigate, Link} from 'react-router-dom'
 
 
@@ -6,13 +7,18 @@ function Listado() {
 
     const  token = localStorage.getItem('token')
     const navigate = useNavigate()
+    const [personajes,setPersonajes] = useState([])
 
     useEffect(() => {
         
         if(token === null){
             navigate('/')
         }
-    }, []);
+        axios.get('https://rickandmortyapi.com/api/character')
+        .then(res=>setPersonajes(res.data.results))
+    }, [setPersonajes]);
+
+    console.log(personajes);
 
     return (
     <div>
