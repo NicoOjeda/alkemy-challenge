@@ -39,7 +39,7 @@ function Listado() {
                     <p className="card-text">Genero: {personaje.gender}</p>
                     <p className="card-text">Especie: {personaje.species}</p>
                     <p className="card-text">Estatus: {personaje.status}</p>
-                    <Link to="/" className="btn btn-primary">Volver</Link>
+                    <Link to={`/detalle/${personaje.id}`} className="btn btn-primary">Volver</Link>
                   </div>
               </div>
           </div>
