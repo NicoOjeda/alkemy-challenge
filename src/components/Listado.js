@@ -5,7 +5,7 @@ import swal from '@sweetalert/with-react'
 
 function Listado() {
 
-    const  token = localStorage.getItem('token')
+    const  token = sessionStorage.getItem('token')
     const navigate = useNavigate()
     const [personajes,setPersonajes] = useState([])
 
@@ -23,7 +23,6 @@ function Listado() {
         })
     }, [setPersonajes]);
 
-    console.log(personajes);
 
     return (
     <div>
@@ -36,10 +35,8 @@ function Listado() {
                   <img src={personaje.image} className="card-img-top" alt="..."/>
                   <div className="card-body">
                     <h5 className="card-title">{personaje.name}</h5>
-                    <p className="card-text">Genero: {personaje.gender}</p>
                     <p className="card-text">Especie: {personaje.species}</p>
-                    <p className="card-text">Estatus: {personaje.status}</p>
-                    <Link to={`/detalle/${personaje.id}`} className="btn btn-primary">Volver</Link>
+                    <Link to={`/detalle/${personaje.id}`} className="btn btn-primary">Detalle</Link>
                   </div>
               </div>
           </div>
