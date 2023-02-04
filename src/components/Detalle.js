@@ -7,7 +7,7 @@ function Detalle() {
 
     const  token = sessionStorage.getItem('token')
     const navigate = useNavigate()
-    const [personajeDetalle, setPersonajeDetalle] = useState({})
+    const [Detalle, setDetalle] = useState(null)
 
     let {id} = useParams()
 
@@ -18,33 +18,42 @@ function Detalle() {
             navigate('/')
         } 
         axios.get(`https://rickandmortyapi.com/api/character/${id}`)
-        .then(res=> setPersonajeDetalle(res.data))
+        .then(res=> setDetalle(res.data))
         .catch(error=>{
             swal(
               <h2>{error}</h2>
           )
           })
-    }, [setPersonajeDetalle]);
+    }, [setDetalle]);
 
-    console.log(personajeDetalle);
+    console.log(Detalle);
 
   return (
-    <div>
-        <div class="card mb-3" >
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="..." class="img-fluid rounded-start" alt="..."/>
+      <>
+        { Detalle? 
+        (
+            <div className="card mb-3" >
+            <div className="row g-0">
+                <div className="col-md-4">
+                    <img src={Detalle.image} className="img-fluid rounded-start" alt={Detalle.name}/>
                 </div>
-                <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                <div className="col-md-8">
+                <div className="card-body">
+                    <h5 className="card-title">{Detalle.name}</h5>
+                    <p className="card-text">Tipo: {Detalle.type}</p>
+                    <p className="card-text">Status: {Detalle.status}</p>
+                    <p className="card-text">Especie: {Detalle.species}</p>
+                    <p className="card-text">Origen: {Detalle.origin.name}</p>
+                    <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
                 </div>
                 </div>
             </div>
         </div>
-    </div>
+        ):(
+           <p>cargando</p> 
+        ) }
+        
+    </>
   )
 }
 
