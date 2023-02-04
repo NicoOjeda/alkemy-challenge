@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom'
 
 
 function Login() {
-    let  tokenget = localStorage.getItem('token')
+    let  tokenget = sessionStorage.getItem('token')
     const navigate = useNavigate()
 
     useEffect(() => {  
@@ -46,7 +46,7 @@ function Login() {
         .then(res=>{
             swal(<h2>'Estas dentro'</h2>);
                 const tokenrecibido = res.data.token;
-                localStorage.setItem('token', tokenrecibido)
+                sessionStorage.setItem('token', tokenrecibido)
                 navigate('/listado')
         })
     }
