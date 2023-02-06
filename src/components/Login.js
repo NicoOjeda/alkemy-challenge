@@ -1,6 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import axios from 'axios'; 
+import swal from '@sweetalert/with-react'
+import {useNavigate} from 'react-router-dom'
+
 
 function Login() {
+    let  tokenget = sessionStorage.getItem('token')
+    const navigate = useNavigate()
+
+    useEffect(() => {  
+        if(tokenget){
+            navigate('/listado')
+        }
+    }, []);
 
     const submitHandler = (e)=>{    
         e.preventDefault();
@@ -10,25 +22,41 @@ function Login() {
         const regexEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
         if(email === "" || password === ""){
-            console.log("los campos no pueden estar vacios");
+            
+            swal(
+                <h2>"los campos no pueden estar vacios"</h2>
+            );
             return
         }
-
         if (email !== "" && !regexEmail.test(email)){
-            console.log("debes ingresar una direccion de correo electronico valida");
+            swal(
+                <h2>"debes ingresar una direccion de correo electronico valida"</h2>
+            );
             return
-        }
-        
+        }      
         if(email !== 'challenge@alkemy.org' || password !== 'react'){
-            console.log('credenciales invalidas');
+            swal(
+                <h2>'credenciales invalidas'</h2>
+            );
             return
         }
 
-        console.log('ya podemos enviar informacion');
+        axios
+        .post('http://challenge-react.alkemy.org', { email , password })
+        .then(res=>{
+            swal(<h2>'Estas dentro'</h2>);
+                const tokenrecibido = res.data.token;
+                sessionStorage.setItem('token', tokenrecibido)
+                navigate('/listado')
+        })
     }
+
+    
+   
 
   return (
     <>
+    
     <h2>Formulario de login</h2>
     <form onSubmit={submitHandler}>
         <label>
